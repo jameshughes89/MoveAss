@@ -1,3 +1,3 @@
-# Movement-Assessment-Application
+# MoveAss
 
 Movement assessment application for fitbit
