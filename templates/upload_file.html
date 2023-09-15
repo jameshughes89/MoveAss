@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Movement Assessment Application</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      body {
+        background-image: url('static/images/doctor-results-on-tablet-700px.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container text-center" style="margin-top: 80px">
+      <img src="static/images/Screen Shot 2023-04-26 at 10.28.06 AM.PNG" height="150" width="250">
+      <h1 style="padding-top: 20px">Welcome to the Movement Assessment App</h1>
+      <form
+        method="POST"
+        action="/"
+        enctype="multipart/form-data"
+        style="margin-top: 30px"
+      >
+        <div class="mb-3">
+          <input
+            class="form-control"
+            type="file"
+            name="csvFile"
+            accept=".csv,.txt"
+            required
+          />
+          <button
+            type="submit"
+            class="btn btn-primary mb-3"
+            style="margin-top: 30px"
+          >
+            Upload CSV
+          </button>
+
+        </div>
+      </form>
+      <span id="ageError" style="color:red">{{ msg }}</span>
+    </div>
+    <div style="position:fixed; bottom:0;">
+      <p style="padding-left: 20px;">
+        For questions contact (<a href = "mailto: abc@example.com">rreid@stfx.ca</a>)
+      </p>
+    </div>
+  </body>
+</html>
