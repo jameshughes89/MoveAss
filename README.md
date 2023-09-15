@@ -1,3 +1,3 @@
-# Movement-Assesment-Application
+# Movement-Assessment-Application
 
 Movement assessment application for fitbit
