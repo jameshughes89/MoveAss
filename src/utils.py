@@ -1,8 +1,8 @@
-
 from datetime import datetime, timedelta
 
+
 def adjust_duplicate(s_date, s_time):
-    # purify data 
+    # purify data
     s_date = [str(x).split(" ")[0] for x in s_date]
     s_time = [str(x).split(" ")[0] for x in s_time]
 
@@ -32,16 +32,18 @@ def adjust_duplicate(s_date, s_time):
         # if duplicate data found, find the key of that data in the list
         target_index = s_date.index(duplicate_date)
         # print(target_index)
-        previous_date = datetime.strptime(s_date[target_index].replace('"', ''), '%Y-%m-%d') - timedelta(days=1)
-        previous_date = previous_date.strftime('%Y-%m-%d')
+        previous_date = datetime.strptime(
+            s_date[target_index].replace('"', ""), "%Y-%m-%d"
+        ) - timedelta(days=1)
+        previous_date = previous_date.strftime("%Y-%m-%d")
         print("duplicate date: ", duplicate_date)
         print("previous date: ", previous_date)
-    
+
     if previous_date:
         # get the index of duplicate date
         target_index = s_date.index(duplicate_date)
         # check if the previous date is present in the list
-        if s_date[target_index+2] == str(previous_date):
+        if s_date[target_index + 2] == str(previous_date):
             print("Previous date present")
             # as the previous date is present, system will just drop the duplicate
             s_date.remove(s_date[target_index])
@@ -50,11 +52,10 @@ def adjust_duplicate(s_date, s_time):
             print("Previous date isn't present")
             # as the previous date isn't present
             # adjust one duplicate to the previous date
-            s_date.insert(target_index+2, previous_date)
-            s_time.insert(target_index+2, duplicate_time)
+            s_date.insert(target_index + 2, previous_date)
+            s_time.insert(target_index + 2, duplicate_time)
             s_date.remove(s_date[target_index])
             s_time.remove(s_time[target_index])
-
 
     print("sleep date")
     print(s_date)

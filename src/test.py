@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 #         # Convert bedtime string to datetime
 #         bedtime_dt = datetime.strptime(bedtime, "%Y-%m-%d %I:%M%p")
 #         # print('hour: ', bedtime_dt.hour, bedtime_dt.minute)
-        
+
 #         if trigger == 'start':
 #           # Check if bedtime crosses midnight
 #           if bedtime_dt.hour < 12:  # Assumes that times before 12:00PM are for the next day
@@ -35,7 +35,7 @@ from datetime import datetime, timedelta
 #           else:
 #               extension = "pm"
 #           # print(round(average_time))
-    
+
 #     return str(round(average_time, 2)) + extension
 
 # # Your provided dataset
@@ -92,16 +92,18 @@ def adjust_duplicate(s_date, s_time):
         # if duplicate data found, find the key of that data in the list
         target_index = s_date.index(duplicate_date)
         # print(target_index)
-        previous_date = datetime.strptime(s_date[target_index], '%Y-%m-%d') - timedelta(days=1)
-        previous_date = previous_date.strftime('%Y-%m-%d')
+        previous_date = datetime.strptime(s_date[target_index], "%Y-%m-%d") - timedelta(
+            days=1
+        )
+        previous_date = previous_date.strftime("%Y-%m-%d")
         print("duplicate date: ", duplicate_date)
         print("previous date: ", previous_date)
-    
+
     if previous_date:
         # get the index of duplicate date
         target_index = s_date.index(duplicate_date)
         # check if the previous date is present in the list
-        if s_date[target_index+2] == str(previous_date):
+        if s_date[target_index + 2] == str(previous_date):
             print("Previous date present")
             # as the previous date is present, system will just drop the duplicate
             s_date.remove(s_date[target_index])
@@ -110,39 +112,29 @@ def adjust_duplicate(s_date, s_time):
             print("Previous date isn't present")
             # as the previous date isn't present
             # adjust one duplicate to the previous date
-            s_date.insert(target_index+2, previous_date)
-            s_time.insert(target_index+2, duplicate_time)
+            s_date.insert(target_index + 2, previous_date)
+            s_time.insert(target_index + 2, duplicate_time)
             s_date.remove(s_date[target_index])
             s_time.remove(s_time[target_index])
-
 
     print("sleep date")
     print(s_date)
     print("sleep time")
     print(s_time)
 
+
 sleep_data = [
-    '2023-05-15',
-    '2023-05-14',
-    '2023-05-13',
-    '2023-05-13',
-    '2023-05-12',
-    '2023-05-11',
-    '2023-05-10',
-    '2023-05-09',
-    '2023-05-08',
+    "2023-05-15",
+    "2023-05-14",
+    "2023-05-13",
+    "2023-05-13",
+    "2023-05-12",
+    "2023-05-11",
+    "2023-05-10",
+    "2023-05-09",
+    "2023-05-08",
 ]
 
-sleep_time = [
-    '7.98',
-    '6.00',
-    '8.22',
-    '7.63',
-    '1.12',
-    '6.58',
-    '6.90',
-    '8.00',
-    '7.00'
-]
+sleep_time = ["7.98", "6.00", "8.22", "7.63", "1.12", "6.58", "6.90", "8.00", "7.00"]
 
 adjust_duplicate(sleep_data, sleep_time)
