@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "setuptools-git-versioning<2"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools-git-versioning]
+enabled = true
+
+[project]
+name = "MoveAss"
+dynamic = ["version"]
+authors = [
+  { name="F Aziz", email="x2021gmb@stfx.ca" },
+  { name="ATM S Ahamed", email="x2021gly@stfx.ca" },
+  { name="R Reid", email="rreid@stfx.ca" },
+  { name="J Hughes", email="jhughes@stfx.ca" },
+]
+description = "Movement assessment application for fitbit"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "black==22.12.0",
+  "flake8==4.0.1",
+  "flake8-black==0.3.5",
+  "flake8-isort==5.0.3",
+  "flask==2.3.3",
+  "isort==5.11.0",
+  "matplotlib==3.7.2",
+  "mdformat==0.7.16",
+  "mdformat-black==0.1.1",
+  "mdformat-gfm==0.3.5",
+  "numpy==1.25.2",
+  "pandas==2.1.0",
+  "pep8-naming==0.13.2",
+]
+
+[project.scripts]
+format = "console_scripts.console_scripts:run_code_formatters"
+verify = "console_scripts.console_scripts:run_code_verification"
