@@ -1,4 +1,19 @@
-import { calculateBmi } from '../src';
+import { calculateAverage, calculateBmi, calculateSum } from '../src';
+
+describe('calculateAverage', () => {
+  test('Empty array returns zero', () => {
+    expect(calculateAverage([])).toBe(0);
+  });
+  test('Array of positive numbers returns correct average', () => {
+    expect(calculateAverage([0, 1, 2, 3, 4])).toBe(2);
+  });
+  test('Array of negative numbers returns correct sum', () => {
+    expect(calculateAverage([0, -1, -2, -3, -4])).toBe(-2);
+  });
+  test('Array of positive and negative numbers returns correct sum', () => {
+    expect(calculateAverage([0, -1, 2, -3, 4])).toBeCloseTo(0.4);
+  });
+});
 
 describe('calculateBmi', () => {
   test('Zero lbs weight returns BMI of zero', () => {
@@ -7,7 +22,22 @@ describe('calculateBmi', () => {
   test('Zero cm height returns BMI of infinity', () => {
     expect(calculateBmi(1, 0)).toBe(Infinity);
   });
-  test('200 lbs weight 200 cm height returns BMI of 22.679625', () => {
+  test('Arbitrary non-zero height and weight returns correct BMI', () => {
     expect(calculateBmi(200, 200)).toBeCloseTo(22.679625);
+  });
+});
+
+describe('calculateSum', () => {
+  test('Empty array returns zero', () => {
+    expect(calculateSum([])).toBe(0);
+  });
+  test('Array of positive numbers returns correct sum', () => {
+    expect(calculateSum([0, 1, 2, 3, 4])).toBe(10);
+  });
+  test('Array of negative numbers returns correct sum', () => {
+    expect(calculateSum([0, -1, -2, -3, -4])).toBe(-10);
+  });
+  test('Array of positive and negative numbers returns correct sum', () => {
+    expect(calculateSum([0, -1, 2, -3, 4])).toBe(2);
   });
 });
