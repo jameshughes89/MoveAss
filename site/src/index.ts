@@ -13,3 +13,11 @@ export function calculateSum(data: Array<number>): number {
   }
   return runningTotal;
 }
+
+export function calculateAverage(data: Array<number>): number {
+  if (data.length == 0) {
+    return 0;
+  } else {
+    return calculateSum(data) / data.length;
+  }
+}
