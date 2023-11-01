@@ -1,0 +1,23 @@
+{
+  "name": "moveass",
+  "version": "1.0.0",
+  "description": "Movement assessment application for fitbit",
+  "main": "site/index.js",
+  "scripts": {
+    "test": "jest",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "keywords": [],
+  "author": "J. Hughes",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.7",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  }
+}
