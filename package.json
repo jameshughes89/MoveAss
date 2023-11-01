@@ -5,7 +5,7 @@
   "main": "site/index.js",
   "scripts": {
     "test": "jest",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"site/**/*.ts\""
   },
   "keywords": [],
   "author": "J. Hughes",
