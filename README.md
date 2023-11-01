@@ -5,6 +5,8 @@ Movement assessment application for fitbit
 
 ### Setup
 
+In the root of the working directory 
+
 ```bash
 npm install
 ```
