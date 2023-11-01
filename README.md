@@ -3,9 +3,16 @@
 Movement assessment application for fitbit
 
 
+## Running
+
+Open `index.html`
+
+
+## Developing
+
 ### Setup
 
-In the root of the working directory 
+In the root of the working directory
 
 ```bash
 npm install
