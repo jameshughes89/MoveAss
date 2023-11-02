@@ -131,7 +131,7 @@ export function didPassActivityTarget(totalModerateVigorousActivity: number, tar
  * @param didPass - True if the target was met/exceeded, false otherwise
  * @return Colour string for a pass or fail
  */
-export function didPassColour(didPass: boolean): string{
+export function didPassColour(didPass: boolean): string {
   if (didPass) {
     return COLOUR_PASS;
   } else {
