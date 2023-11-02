@@ -5,13 +5,35 @@ import {
   COLOUR_OBESE_CLASS_I,
   COLOUR_OBESE_CLASS_II,
   COLOUR_OBESE_CLASS_III,
+  COLOUR_PASS,
+  COLOUR_FAIL,
+  TARGET_ACTIVITY_MINUTES_BETWEEN_18_65,
+  TARGET_ACTIVITY_MINUTES_OUTSIDE_18_65,
+  activityTargetFromAge,
   ageFromDobAsOfDay,
   averageOf,
   bmiCategory,
   bmiCategoryColour,
   bmiKgM,
+  didPassActivityTarget,
+  didPassColour,
   sumOf,
 } from '../src';
+
+describe('activityTargetFromAge', () => {
+  test('Age of 17 returns outside 18 -- 65 target', () => {
+    expect(activityTargetFromAge(17)).toBe(TARGET_ACTIVITY_MINUTES_OUTSIDE_18_65);
+  });
+  test('Age of 18 returns between 18 -- 65 target', () => {
+    expect(activityTargetFromAge(18)).toBe(TARGET_ACTIVITY_MINUTES_BETWEEN_18_65);
+  });
+  test('Age of 64 returns between 18 -- 65 target', () => {
+    expect(activityTargetFromAge(64)).toBe(TARGET_ACTIVITY_MINUTES_BETWEEN_18_65);
+  });
+  test('Age of 65 returns outside 18 -- 65 target', () => {
+    expect(activityTargetFromAge(65)).toBe(TARGET_ACTIVITY_MINUTES_OUTSIDE_18_65);
+  });
+});
 
 describe('ageFromDobAsOfDay', () => {
   test('Dob 10 years after asOf date returns -10', () => {
@@ -127,6 +149,27 @@ describe('bmiKgM', () => {
   });
   test('Arbitrary non-zero height and weight returns correct BMI', () => {
     expect(bmiKgM(95, 1.95)).toBeCloseTo(24.9835634451);
+  });
+});
+
+describe('didPassActivityTarget', () => {
+  test('Did not meet threshold returns false', () => {
+    expect(didPassActivityTarget(9, 10)).toBe(false);
+  });
+  test('Did meet threshold returns true', () => {
+    expect(didPassActivityTarget(10, 10)).toBe(true);
+  });
+  test('Did exceed threshold returns true', () => {
+    expect(didPassActivityTarget(11, 10)).toBe(true);
+  });
+});
+
+describe('didPassColour', () => {
+  test('Passed targets (true) returns passed colour', () => {
+    expect(didPassColour(true)).toBe(COLOUR_PASS);
+  });
+  test('Failed targets (false) returns failed colour', () => {
+    expect(didPassColour(false)).toBe(COLOUR_FAIL);
   });
 });
 

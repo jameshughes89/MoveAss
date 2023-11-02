@@ -8,6 +8,12 @@ export const COLOUR_OBESE_CLASS_I: string = 'lightsalmon';
 export const COLOUR_OBESE_CLASS_II: string = 'salmon';
 export const COLOUR_OBESE_CLASS_III: string = 'darksalmon';
 
+export const COLOUR_PASS: string = 'palegreen';
+export const COLOUR_FAIL: string = 'pink';
+
+export const TARGET_ACTIVITY_MINUTES_BETWEEN_18_65: number = 200;
+export const TARGET_ACTIVITY_MINUTES_OUTSIDE_18_65: number = 150;
+
 /**
  * Calculate the BMI based on a mass in kilograms and height in meters.
  *
@@ -92,6 +98,45 @@ export function ageFromDobAsOfDay(dob: Date, asOf: Date): number {
     age--;
   }
   return age;
+}
+
+/**
+ * Get the weekly activity target for an individual based on their age.
+ *
+ * @param age - Age of the individual
+ * @return Weekly activity target in minutes for the specified age
+ */
+export function activityTargetFromAge(age: number): number {
+  if (age >= 18 && age < 65) {
+    return TARGET_ACTIVITY_MINUTES_BETWEEN_18_65;
+  } else {
+    return TARGET_ACTIVITY_MINUTES_OUTSIDE_18_65;
+  }
+}
+
+/**
+ * Determine if an individual met or exceeded their physical activity target for the week.
+ *
+ * @param totalModerateVigorousActivity - Total moderate and vigorous activity for the week
+ * @param target - Physical activity target for the week
+ * @return If they met/exceeded their target (true) or not (false)
+ */
+export function didPassActivityTarget(totalModerateVigorousActivity: number, target: number): boolean {
+  return totalModerateVigorousActivity >= target;
+}
+
+/**
+ * Get the colour associated with passing/failing a target.
+ *
+ * @param didPass - True if the target was met/exceeded, false otherwise
+ * @return Colour string for a pass or fail
+ */
+export function didPassColour(didPass: boolean): string {
+  if (didPass) {
+    return COLOUR_PASS;
+  } else {
+    return COLOUR_FAIL;
+  }
 }
 
 /**
