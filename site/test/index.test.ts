@@ -16,6 +16,7 @@ import {
   bmiCategoryColour,
   bmiKgM,
   didPassActivityTarget,
+  didPassSedentaryTarget,
   didPassColour,
   sumOf,
 } from '../src';
@@ -161,6 +162,18 @@ describe('didPassActivityTarget', () => {
   });
   test('Did exceed threshold returns true', () => {
     expect(didPassActivityTarget(11, 10)).toBe(true);
+  });
+});
+
+describe('didPassSedentaryTarget', () => {
+  test('Exceeded threshold returns false', () => {
+    expect(didPassSedentaryTarget(481)).toBe(false);
+  });
+  test('At threshold returns true', () => {
+    expect(didPassSedentaryTarget(480)).toBe(true);
+  });
+  test('Under threshold returns true', () => {
+    expect(didPassSedentaryTarget(479)).toBe(true);
   });
 });
 
