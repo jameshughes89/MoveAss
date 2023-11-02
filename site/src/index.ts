@@ -13,6 +13,35 @@ export function bmiKgM(massKg: number, heightM: number): number {
 }
 
 /**
+ * Get a BMI categories based on a BMI. The BMI categories, as defined by the Wold Health Organization (WHO) are as
+ * follows:
+ *  bmi < 18.5 --- Underweight
+ *  18.5 <= bmi < 25 --- Normal weight
+ *  25 <= bmi < 30 --- Overweight
+ *  30 <= bmi < 35 --- Obese (Class I)
+ *  35 <= bmi < 40 --- Obese (Class II)
+ *  40 <= bmi --- Obese (Class III)
+ *
+ * @param bmi - BMI of the individual
+ * @return BMI Category
+ */
+export function bmiCategory(bmi: number): string {
+  if (bmi < 18.5) {
+    return 'Underweight';
+  } else if (bmi >= 18.5 && bmi < 25) {
+    return 'Normal Weight';
+  } else if (bmi >= 25 && bmi < 30) {
+    return 'Overweight';
+  } else if (bmi >= 30 && bmi < 35) {
+    return 'Obese (Class I)';
+  } else if (bmi >= 35 && bmi < 40) {
+    return 'Obese (Class II)';
+  } else {
+    return 'Obese (Class III)';
+  }
+}
+
+/**
  * Calculate the sum of the numbers within an array.
  *
  * @param data - The array to sum the contents of
@@ -30,7 +59,7 @@ export function sumOf(data: Array<number>): number {
  * Calculate the average of the numbers within an array.
  *
  * @param data - The array to calculate the average of
- * @return The average of the numbers within the array 
+ * @return The average of the numbers within the array
  */
 export function averageOf(data: Array<number>): number {
   if (data.length == 0) {
