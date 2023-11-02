@@ -5,6 +5,8 @@ import {
   COLOUR_OBESE_CLASS_I,
   COLOUR_OBESE_CLASS_II,
   COLOUR_OBESE_CLASS_III,
+  COLOUR_PASS,
+  COLOUR_FAIL,
   TARGET_ACTIVITY_MINUTES_BETWEEN_18_65,
   TARGET_ACTIVITY_MINUTES_OUTSIDE_18_65,
   activityTargetFromAge,
@@ -14,6 +16,7 @@ import {
   bmiCategoryColour,
   bmiKgM,
   didPassActivityTarget,
+  didPassColour,
   sumOf,
 } from '../src';
 
@@ -158,6 +161,15 @@ describe('didPassActivityTarget', () => {
   });
   test('Did exceed threshold returns true', () => {
     expect(didPassActivityTarget(11, 10)).toBe(true);
+  });
+});
+
+describe('didPassColour', () => {
+  test('Passed targets (true) returns passed colour', () => {
+    expect(didPassColour(true)).toBe(COLOUR_PASS);
+  });
+  test('Failed targets (false) returns failed colour', () => {
+    expect(didPassColour(false)).toBe(COLOUR_FAIL);
   });
 });
 

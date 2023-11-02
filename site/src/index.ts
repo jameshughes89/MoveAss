@@ -8,8 +8,8 @@ export const COLOUR_OBESE_CLASS_I: string = 'lightsalmon';
 export const COLOUR_OBESE_CLASS_II: string = 'salmon';
 export const COLOUR_OBESE_CLASS_III: string = 'darksalmon';
 
-const COLOUR_PASS: string = 'palegreen';
-const COLOUR_FAIL: string = 'pink';
+export const COLOUR_PASS: string = 'palegreen';
+export const COLOUR_FAIL: string = 'pink';
 
 export const TARGET_ACTIVITY_MINUTES_BETWEEN_18_65: number = 200;
 export const TARGET_ACTIVITY_MINUTES_OUTSIDE_18_65: number = 150;
