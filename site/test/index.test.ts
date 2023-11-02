@@ -17,6 +17,7 @@ import {
   bmiKgM,
   didPassActivityTarget,
   didPassSedentaryTarget,
+  didPasSleepTarget,
   didPassColour,
   sumOf,
 } from '../src';
@@ -176,6 +177,47 @@ describe('didPassSedentaryTarget', () => {
     expect(didPassSedentaryTarget(479)).toBe(true);
   });
 });
+
+
+didPasSleepTarget
+describe('didPasSleepTarget', () => {
+  test('Empty array returns true', () => {
+    expect(didPasSleepTarget([])).toBe(true);
+  });
+
+  test('Within threshold window all days returns true', () => {
+    expect(didPasSleepTarget([430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530])).toBe(true);
+  });
+
+  test('On threshold window all days returns true', () => {
+    expect(didPasSleepTarget([420, 420, 420, 540, 540, 540])).toBe(true);
+  });
+
+  test('Above maximum threshold one day returns false', () => {
+    expect(didPasSleepTarget([430, 440, 450, 460, 470, 541, 490, 500, 510, 520, 530])).toBe(false);
+  });
+  test('Above maximum threshold some days returns false', () => {
+    expect(didPasSleepTarget([430, 440, 541, 460, 470, 541, 490, 500, 541, 520, 530])).toBe(false);
+  });
+  test('Above maximum threshold all days returns false', () => {
+    expect(didPasSleepTarget([541, 541, 541, 541, 541, 541])).toBe(false);
+  });
+
+  test('Below minimum threshold one day returns false', () => {
+    expect(didPasSleepTarget([430, 440, 450, 460, 470, 419, 490, 500, 510, 520, 530])).toBe(false);
+  });
+  test('Below minimum threshold some days returns false', () => {
+    expect(didPasSleepTarget([430, 440, 419, 460, 470, 419, 490, 500, 419, 520, 530])).toBe(false);
+  });
+  test('Below minimum threshold all days returns false', () => {
+    expect(didPasSleepTarget([419, 419, 419, 419, 419, 419])).toBe(false);
+  });
+
+  test('Above and below threshold window some days returns false', () => {
+    expect(didPasSleepTarget([430, 440, 419, 460, 470, 541, 490, 500, 419, 520, 530])).toBe(false);
+  });
+});
+
 
 describe('didPassColour', () => {
   test('Passed targets (true) returns passed colour', () => {
