@@ -115,6 +115,17 @@ export function activityTargetFromAge(age: number): number {
 }
 
 /**
+ * Determine if an individual met or exceeded their physical activity target for the week.
+ *
+ * @param totalModerateVigorousActivity - Total moderate and vigorous activity for the week
+ * @param target - Physical activity target for the week
+ * @return If they met/exceeded their target (true) or not (false)
+ */
+export function didPassActivityTarget(totalModerateVigorousActivity: number, target: number): boolean {
+  return target < totalModerateVigorousActivity;
+}
+
+/**
  * Calculate the sum of the numbers within an array.
  *
  * @param data - The array to sum the contents of
