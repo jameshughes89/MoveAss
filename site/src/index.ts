@@ -126,6 +126,20 @@ export function didPassActivityTarget(totalModerateVigorousActivity: number, tar
 }
 
 /**
+ * Get the colour associated with passing/failing a target.
+ *
+ * @param didPass - True if the target was met/exceeded, false otherwise
+ * @return Colour string for a pass or fail
+ */
+export function didPassColour(didPass: boolean): string{
+  if (didPass) {
+    return COLOUR_PASS;
+  } else {
+    return COLOUR_FAIL;
+  }
+}
+
+/**
  * Calculate the sum of the numbers within an array.
  *
  * @param data - The array to sum the contents of
