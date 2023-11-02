@@ -122,7 +122,7 @@ export function activityTargetFromAge(age: number): number {
  * @return If they met/exceeded their target (true) or not (false)
  */
 export function didPassActivityTarget(totalModerateVigorousActivity: number, target: number): boolean {
-  return target < totalModerateVigorousActivity;
+  return totalModerateVigorousActivity >= target;
 }
 
 /**
