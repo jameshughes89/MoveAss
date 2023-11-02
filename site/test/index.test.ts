@@ -1,4 +1,4 @@
-import { calculateAverage, calculateBmi, calculateSum } from '../src';
+import { calculateAverage, bmiKgM, calculateSum } from '../src';
 
 describe('calculateAverage', () => {
   test('Empty array returns zero', () => {
@@ -15,15 +15,15 @@ describe('calculateAverage', () => {
   });
 });
 
-describe('calculateBmi', () => {
-  test('Zero lbs weight returns BMI of zero', () => {
-    expect(calculateBmi(0, 1)).toBe(0);
+describe('bmiKgM', () => {
+  test('Zero kgs mass returns BMI of zero', () => {
+    expect(bmiKgM(0, 1)).toBe(0);
   });
-  test('Zero cm height returns BMI of infinity', () => {
-    expect(calculateBmi(1, 0)).toBe(Infinity);
+  test('Zero m height returns BMI of infinity', () => {
+    expect(bmiKgM(1, 0)).toBe(Infinity);
   });
   test('Arbitrary non-zero height and weight returns correct BMI', () => {
-    expect(calculateBmi(200, 200)).toBeCloseTo(22.679625);
+    expect(bmiKgM(95, 1.95)).toBeCloseTo(24.9835634451);
   });
 });
 

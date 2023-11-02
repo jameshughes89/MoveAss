@@ -1,9 +1,15 @@
 const KGS_PER_LBS: number = 1 / 2.205;
+const M_PER_CM: number = 1 / 100;
 
-export function calculateBmi(weightLb: number, heightCm: number): number {
-  const weightKg: number = weightLb * KGS_PER_LBS;
-  const heightM: number = heightCm / 100.0;
-  return weightKg / heightM ** 2;
+/**
+ * Calculate the BMI based on a mass in kilograms and height in meters.
+ *
+ * @param massKg - Mass in kilograms
+ * @param heightM - Height in meters
+ * @return The BMI of an individual in kg/(m^{2})
+ */
+export function bmiKgM(massKg: number, heightM: number): number {
+  return massKg / heightM ** 2;
 }
 
 export function calculateSum(data: Array<number>): number {
