@@ -16,7 +16,6 @@ import {
   sumOf,
 } from '../src';
 
-
 describe('activityTargetFromAge', () => {
   test('Age of 17 returns outside 18 -- 65 target', () => {
     expect(activityTargetFromAge(17)).toBe(TARGET_ACTIVITY_MINUTES_OUTSIDE_18_65);
