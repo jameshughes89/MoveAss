@@ -5,12 +5,37 @@ import {
   COLOUR_OBESE_CLASS_I,
   COLOUR_OBESE_CLASS_II,
   COLOUR_OBESE_CLASS_III,
+  ageFromDobAsOfDay,
   averageOf,
   bmiCategory,
   bmiCategoryColour,
   bmiKgM,
   sumOf,
 } from '../src';
+
+describe('ageFromDobAsOfDay', () => {
+  test('Dob 10 years after asOf date returns -10', () => {
+    expect(ageFromDobAsOfDay(new Date('2000-01-01'), new Date('1990-01-01'))).toBe(-10);
+  });
+  test('Dob same as asOf date returns 0', () => {
+    expect(ageFromDobAsOfDay(new Date('2000-01-01'), new Date('2000-01-01'))).toBe(0);
+  });
+  test('Birthday not occurred yet in asOf year returns correct age', () => {
+    expect(ageFromDobAsOfDay(new Date('2000-6-6'), new Date('2020-01-01'))).toBe(19);
+  });
+  test('Birthday occurred already in asOf year returns correct age', () => {
+    expect(ageFromDobAsOfDay(new Date('2000-6-6'), new Date('2020-12-12'))).toBe(20);
+  });
+  test('Birthday not occurred yet in asOf month returns correct age', () => {
+    expect(ageFromDobAsOfDay(new Date('2000-6-6'), new Date('2020-6-5'))).toBe(19);
+  });
+  test('Birthday occurred already in asOf month returns correct age', () => {
+    expect(ageFromDobAsOfDay(new Date('2000-6-6'), new Date('2020-6-7'))).toBe(20);
+  });
+  test('Birthday on asOf day returns correct age', () => {
+    expect(ageFromDobAsOfDay(new Date('2000-6-6'), new Date('2020-6-6'))).toBe(20);
+  });
+});
 
 describe('averageOf', () => {
   test('Empty array returns zero', () => {

@@ -86,15 +86,13 @@ export function bmiCategoryColour(bmi: number): string {
  * @param asOf - The date to calculate the age of the individual on (use "today" to determine the current age)
  * @return The age of the individual as of the specified date
  */
-export function ageFromDobAndToday(dob: Date, asOf: Date): number {
-  let age:number = asOf.getFullYear() - dob.getFullYear();
-  if (asOf.getMonth() < dob.getMonth() ||
-      (asOf.getMonth() === dob.getMonth() && asOf.getDate() < dob.getDate())) {
+export function ageFromDobAsOfDay(dob: Date, asOf: Date): number {
+  let age: number = asOf.getFullYear() - dob.getFullYear();
+  if (asOf.getMonth() < dob.getMonth() || (asOf.getMonth() === dob.getMonth() && asOf.getDate() < dob.getDate())) {
     age--;
   }
   return age;
 }
-
 
 /**
  * Calculate the sum of the numbers within an array.
