@@ -14,6 +14,11 @@ export const COLOUR_FAIL: string = 'pink';
 export const TARGET_ACTIVITY_MINUTES_BETWEEN_18_65: number = 200;
 export const TARGET_ACTIVITY_MINUTES_OUTSIDE_18_65: number = 150;
 
+export const TARGET_SEDENTARY_MAXIMUM_MINUTES: number = 480;
+export const TARGET_SLEEP_MINIMUM_MINUTES: number = 420;
+export const TARGET_SLEEP_MAXIMUM_MINUTES: number = 540;
+
+
 /**
  * Calculate the BMI based on a mass in kilograms and height in meters.
  *
@@ -123,6 +128,16 @@ export function activityTargetFromAge(age: number): number {
  */
 export function didPassActivityTarget(totalModerateVigorousActivity: number, target: number): boolean {
   return totalModerateVigorousActivity >= target;
+}
+
+/**
+ * Determine if an individual's weekly average sedentary time per day stayed below the sedentary target.
+ *
+ * @param averageSedentary - The average sedentary time of the individual
+ * @return If they stayed below/met the target (true) or not (false)
+ */
+export function didPassSedentaryTarget(averageSedentary: number): boolean {
+  return averageSedentary <= TARGET_SEDENTARY_MAXIMUM_MINUTES;
 }
 
 /**
