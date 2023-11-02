@@ -1,6 +1,14 @@
 const KGS_PER_LBS: number = 1 / 2.205;
 const M_PER_CM: number = 1 / 100;
 
+export const COLOUR_UNDERWEIGHT: string = "powderblue";
+export const COLOUR_NORMAL_WEIGHT: string = "palegreen";
+export const COLOUR_OVERWEIGHT: string = "palegoldenrod";
+export const COLOUR_OBESE_CLASS_I: string = "lightsalmon";
+export const COLOUR_OBESE_CLASS_II: string = "salmon";
+export const COLOUR_OBESE_CLASS_III: string = "darksalmon";
+
+
 /**
  * Calculate the BMI based on a mass in kilograms and height in meters.
  *
@@ -57,17 +65,17 @@ export function bmiCategory(bmi: number): string {
  */
 export function bmiCategoryColour(bmi: number): string {
   if (bmi < 18.5) {
-    return 'powderblue';
+    return COLOUR_UNDERWEIGHT;
   } else if (bmi >= 18.5 && bmi < 25) {
-    return 'palegreen';
+    return COLOUR_NORMAL_WEIGHT;
   } else if (bmi >= 25 && bmi < 30) {
-    return 'palegoldenrod';
+    return COLOUR_OVERWEIGHT;
   } else if (bmi >= 30 && bmi < 35) {
-    return 'lightsalmon';
+    return COLOUR_OBESE_CLASS_I;
   } else if (bmi >= 35 && bmi < 40) {
-    return 'salmon';
+    return COLOUR_OBESE_CLASS_II;
   } else {
-    return 'darksalmon';
+    return COLOUR_OBESE_CLASS_III;
   }
 }
 
