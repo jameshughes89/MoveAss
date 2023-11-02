@@ -1,4 +1,16 @@
-import { averageOf, bmiCategory, bmiCategoryColour, bmiKgM, COLOUR_UNDERWEIGHT, COLOUR_NORMAL_WEIGHT, COLOUR_OVERWEIGHT, COLOUR_OBESE_CLASS_I, COLOUR_OBESE_CLASS_II, COLOUR_OBESE_CLASS_III, sumOf } from '../src';
+import {
+  COLOUR_UNDERWEIGHT,
+  COLOUR_NORMAL_WEIGHT,
+  COLOUR_OVERWEIGHT,
+  COLOUR_OBESE_CLASS_I,
+  COLOUR_OBESE_CLASS_II,
+  COLOUR_OBESE_CLASS_III,
+  averageOf,
+  bmiCategory,
+  bmiCategoryColour,
+  bmiKgM,
+  sumOf,
+} from '../src';
 
 describe('averageOf', () => {
   test('Empty array returns zero', () => {
@@ -48,7 +60,6 @@ describe('bmiCategory', () => {
   });
 });
 
-
 describe('bmiCategoryColour', () => {
   test('BMI of 18.49 returns Underweight colour', () => {
     expect(bmiCategoryColour(18.49)).toBe(COLOUR_UNDERWEIGHT);
@@ -81,9 +92,6 @@ describe('bmiCategoryColour', () => {
     expect(bmiCategoryColour(40)).toBe(COLOUR_OBESE_CLASS_III);
   });
 });
-
-
-
 
 describe('bmiKgM', () => {
   test('Zero kgs mass returns BMI of zero', () => {

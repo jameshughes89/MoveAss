@@ -1,13 +1,12 @@
 const KGS_PER_LBS: number = 1 / 2.205;
 const M_PER_CM: number = 1 / 100;
 
-export const COLOUR_UNDERWEIGHT: string = "powderblue";
-export const COLOUR_NORMAL_WEIGHT: string = "palegreen";
-export const COLOUR_OVERWEIGHT: string = "palegoldenrod";
-export const COLOUR_OBESE_CLASS_I: string = "lightsalmon";
-export const COLOUR_OBESE_CLASS_II: string = "salmon";
-export const COLOUR_OBESE_CLASS_III: string = "darksalmon";
-
+export const COLOUR_UNDERWEIGHT: string = 'powderblue';
+export const COLOUR_NORMAL_WEIGHT: string = 'palegreen';
+export const COLOUR_OVERWEIGHT: string = 'palegoldenrod';
+export const COLOUR_OBESE_CLASS_I: string = 'lightsalmon';
+export const COLOUR_OBESE_CLASS_II: string = 'salmon';
+export const COLOUR_OBESE_CLASS_III: string = 'darksalmon';
 
 /**
  * Calculate the BMI based on a mass in kilograms and height in meters.
