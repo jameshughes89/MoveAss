@@ -1,4 +1,4 @@
-import { averageOf, bmiCategory, bmiKgM, sumOf } from '../src';
+import { averageOf, bmiCategory, bmiCategoryColour, bmiKgM, COLOUR_UNDERWEIGHT, COLOUR_NORMAL_WEIGHT, COLOUR_OVERWEIGHT, COLOUR_OBESE_CLASS_I, COLOUR_OBESE_CLASS_II, COLOUR_OBESE_CLASS_III, sumOf } from '../src';
 
 describe('averageOf', () => {
   test('Empty array returns zero', () => {
@@ -47,6 +47,43 @@ describe('bmiCategory', () => {
     expect(bmiCategory(40)).toBe('Obese (Class III)');
   });
 });
+
+
+describe('bmiCategoryColour', () => {
+  test('BMI of 18.49 returns Underweight colour', () => {
+    expect(bmiCategoryColour(18.49)).toBe(COLOUR_UNDERWEIGHT);
+  });
+  test('BMI of 18.5 returns Normal Weight colour', () => {
+    expect(bmiCategoryColour(18.5)).toBe(COLOUR_NORMAL_WEIGHT);
+  });
+  test('BMI of 24.99 returns Normal Weight colour', () => {
+    expect(bmiCategoryColour(24.99)).toBe(COLOUR_NORMAL_WEIGHT);
+  });
+  test('BMI of 25 returns Overweight colour', () => {
+    expect(bmiCategoryColour(25)).toBe(COLOUR_OVERWEIGHT);
+  });
+  test('BMI of 29.99 returns Overweight colour', () => {
+    expect(bmiCategoryColour(29.99)).toBe(COLOUR_OVERWEIGHT);
+  });
+  test('BMI of 30 returns Obese (Class I) colour', () => {
+    expect(bmiCategoryColour(30)).toBe(COLOUR_OBESE_CLASS_I);
+  });
+  test('BMI of 34.99 returns Obese (Class I) colour', () => {
+    expect(bmiCategoryColour(34.99)).toBe(COLOUR_OBESE_CLASS_I);
+  });
+  test('BMI of 35 returns Obese (Class II) colour', () => {
+    expect(bmiCategoryColour(35)).toBe(COLOUR_OBESE_CLASS_II);
+  });
+  test('BMI of 39.99 returns Obese (Class II) colour', () => {
+    expect(bmiCategoryColour(39.99)).toBe(COLOUR_OBESE_CLASS_II);
+  });
+  test('BMI of 40 returns Obese (Class III) colour', () => {
+    expect(bmiCategoryColour(40)).toBe(COLOUR_OBESE_CLASS_III);
+  });
+});
+
+
+
 
 describe('bmiKgM', () => {
   test('Zero kgs mass returns BMI of zero', () => {
