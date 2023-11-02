@@ -26,18 +26,18 @@ export function bmiKgM(massKg: number, heightM: number): number {
  * @return BMI Category
  */
 export function bmiCategory(bmi: number): string {
-  if (bmi < 18.5){
-    return "Underweight"
+  if (bmi < 18.5) {
+    return 'Underweight';
   } else if (bmi >= 18.5 && bmi < 25) {
-    return "Normal Weight"
-  } else if (bmi >= 25 && bmi <30) {
-    return "Overweight"
+    return 'Normal Weight';
+  } else if (bmi >= 25 && bmi < 30) {
+    return 'Overweight';
   } else if (bmi >= 30 && bmi < 35) {
-    return "Obese (Class I)"
+    return 'Obese (Class I)';
   } else if (bmi >= 35 && bmi < 40) {
-    return "Obese (Class II)"
+    return 'Obese (Class II)';
   } else {
-    return "Obese (Class III)"
+    return 'Obese (Class III)';
   }
 }
 
@@ -59,7 +59,7 @@ export function sumOf(data: Array<number>): number {
  * Calculate the average of the numbers within an array.
  *
  * @param data - The array to calculate the average of
- * @return The average of the numbers within the array 
+ * @return The average of the numbers within the array
  */
 export function averageOf(data: Array<number>): number {
   if (data.length == 0) {
