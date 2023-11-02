@@ -18,7 +18,6 @@ export const TARGET_SEDENTARY_MAXIMUM_MINUTES: number = 480;
 export const TARGET_SLEEP_MINIMUM_MINUTES: number = 420;
 export const TARGET_SLEEP_MAXIMUM_MINUTES: number = 540;
 
-
 /**
  * Calculate the BMI based on a mass in kilograms and height in meters.
  *
@@ -140,7 +139,6 @@ export function didPassSedentaryTarget(averageSedentary: number): boolean {
   return averageSedentary <= TARGET_SEDENTARY_MAXIMUM_MINUTES;
 }
 
-
 /**
  * Determine if an individual stayed between the target sleep times over the whole week. An individual passes if the
  * time asleep stays between the minimum and maximum targets each day. All days must be within the target th pass.
@@ -150,7 +148,7 @@ export function didPassSedentaryTarget(averageSedentary: number): boolean {
  */
 export function didPasSleepTarget(sleepTimes: Array<number>): boolean {
   for (let i = 0; i < sleepTimes.length; i++) {
-    if(sleepTimes[i] < TARGET_SLEEP_MINIMUM_MINUTES || sleepTimes[i] > TARGET_SLEEP_MAXIMUM_MINUTES){
+    if (sleepTimes[i] < TARGET_SLEEP_MINIMUM_MINUTES || sleepTimes[i] > TARGET_SLEEP_MAXIMUM_MINUTES) {
       return false;
     }
   }
