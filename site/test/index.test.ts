@@ -13,6 +13,7 @@ import {
   bmiCategory,
   bmiCategoryColour,
   bmiKgM,
+  didPassActivityTarget,
   sumOf,
 } from '../src';
 
@@ -145,6 +146,18 @@ describe('bmiKgM', () => {
   });
   test('Arbitrary non-zero height and weight returns correct BMI', () => {
     expect(bmiKgM(95, 1.95)).toBeCloseTo(24.9835634451);
+  });
+});
+
+describe('didPassActivityTarget', () => {
+  test('Did not meet threshold returns false', () => {
+    expect(didPassActivityTarget(9, 10)).toBe(false);
+  });
+  test('Did meet threshold returns true', () => {
+    expect(didPassActivityTarget(10, 10)).toBe(true);
+  });
+  test('Did exceed threshold returns true', () => {
+    expect(didPassActivityTarget(11, 10)).toBe(true);
   });
 });
 
