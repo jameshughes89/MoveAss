@@ -196,3 +196,10 @@ export function averageOf(data: Array<number>): number {
     return sumOf(data) / data.length;
   }
 }
+
+export function parseFitbitCsvString(data: string, startLine: number, endLine: number): Map<string, Array<string>> {
+  lines: Array<string> = data.split(/\r\n|\n/);
+  const keys = Papa.parse(lines[startLine])["data"][0];
+  const fields: Map<string, Array<string>> = {};
+  
+}
