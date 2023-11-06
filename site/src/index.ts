@@ -241,18 +241,23 @@ export function parseFitbitCsvString(
   const dataStartLine: number = headerLine + 1;
   const dataEndLine: number = endLine;
   const lines: Array<string> = data.split(/\r\n|\n/);
-  const keys: Array<string> = Papa.parse(lines[headerLine])['data'][0] as Array<string>;
   const fields: Map<string, Array<string | number>> = new Map();
+  if (lines.length == 0 || lines.length == 1){
+    return fields;
+  }
+  const keys: Array<string> = Papa.parse(lines[headerLine])['data'][0] as Array<string>;
   for (let i: number = 0; i < keys.length; i++) {
+    keys[i] = keys[i].trim();
     fields.set(keys[i], []);
   }
-  for (let i: number = dataStartLine; i < dataEndLine; i++) {
+  for (let i: number = dataStartLine; i <= dataEndLine; i++) {
     const row: Array<string> = Papa.parse(lines[i])['data'][0] as Array<string>;
     for (let j: number = 0; j < row.length; j++) {
-      let data: string | number = row[j];
+      let data: string | number = row[j].trim().replace(/["']/g, '');
       if (j !== 0) {
         // Column 0 is the date
-        data = Number(data.replace(/,/g, ''));
+        data = data.replace(/,/g, '');
+        data = Number(data);
       }
       // @ts-ignore
       fields.get(keys[j]).push(data);
