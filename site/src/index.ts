@@ -1,3 +1,5 @@
+import Papa from 'papaparse';
+
 const KGS_PER_LBS: number = 1 / 2.205;
 const M_PER_CM: number = 1 / 100;
 
@@ -197,9 +199,25 @@ export function averageOf(data: Array<number>): number {
   }
 }
 
-export function parseFitbitCsvString(data: string, startLine: number, endLine: number): Map<string, Array<string>> {
-  lines: Array<string> = data.split(/\r\n|\n/);
-  const keys = Papa.parse(lines[startLine])["data"][0];
-  const fields: Map<string, Array<string>> = {};
-  
+export function parseFitbitCsvString(data: string, headerLine: number, numberOfLines: number): Map<string, Array<string|number>> {
+  const dataStartLine: number = headerLine + 1;
+  const dataEndLine:number = dataStartLine + numberOfLines;
+  const lines: Array<string> = data.split(/\r\n|\n/);
+  const keys: Array<string> = Papa.parse(lines[headerLine])["data"][0] as Array<string>;   // Cast as Array<string>
+  const fields: Map<string, Array<string|number>> = new Map();
+  for (let i = 0; i < keys.length; i++) {
+    fields.set(keys[i], [])
+  }
+  for (let i = dataStartLine; i < dataEndLine; i++) {
+    const row: Array<string> = Papa.parse(lines[i])["data"][0] as Array<string>;
+    for (let j = 0; j < row.length; j++) {
+      let data: string|number = row[j];
+      if (j !== 0) {   // Column 0 is the date
+        data = Number(data.replace(/,/g, ''));
+      }
+      // @ts-ignore
+      fields.get(keys[j]).push(data);
+    }
+  }
+  return fields;
 }
