@@ -221,54 +221,50 @@ describe('didPassColour', () => {
   });
 });
 
-describe("parseFitbitCsvString", () => {
+describe('parseFitbitCsvString', () => {
   test('Empty string returns empty Map', () => {
-    expect(parseFitbitCsvString("", 101, 101)).toEqual(new Map())
+    expect(parseFitbitCsvString('', 101, 101)).toEqual(new Map());
   });
   test('No lines specified to read with start/end line returns Map with keys and empty lists', () => {
-    let testData: string =
-        `This, Is, A, Test
+    let testData: string = `This, Is, A, Test
         "10", "11", "12", "13"
         "20", "21", "22", "23"`;
     let expectedMap: Map<string, Array<string | number>> = new Map([
-        ["This", []],
-        ["Is", []],
-        ["A", []],
-        ["Test", []],
-    ])
-    expect(parseFitbitCsvString(testData, 0, 0)).toEqual(expectedMap)
+      ['This', []],
+      ['Is', []],
+      ['A', []],
+      ['Test', []],
+    ]);
+    expect(parseFitbitCsvString(testData, 0, 0)).toEqual(expectedMap);
   });
   test('One line specified to read with start/end line returns correct Map', () => {
-    let testData: string =
-        `This, Is, A, Test
+    let testData: string = `This, Is, A, Test
         "10", "11", "12", "13"
         "20", "21", "22", "23"`;
     let expectedMap: Map<string, Array<string | number>> = new Map([
-      ["This", ["10"]],
-      ["Is", [11]],
-      ["A", [12]],
-      ["Test", [13]],
-    ])
-    expect(parseFitbitCsvString(testData, 0, 1)).toEqual(expectedMap)
+      ['This', ['10']],
+      ['Is', [11]],
+      ['A', [12]],
+      ['Test', [13]],
+    ]);
+    expect(parseFitbitCsvString(testData, 0, 1)).toEqual(expectedMap);
   });
   test('Multiple line specified to read with start/end line returns correct Map', () => {
-    let testData: string =
-        `This, Is, A, Test
+    let testData: string = `This, Is, A, Test
         "10", "11", "12", "13"
         "20", "21", "22", "23"
         "30", "31", "32", "33"
         "40", "41", "42", "43"`;
     let expectedMap: Map<string, Array<string | number>> = new Map([
-      ["This", ["10", "20", "30"]],
-      ["Is", [11, 21, 31]],
-      ["A", [12, 22, 32]],
-      ["Test", [13, 23, 33]],
-    ])
-    expect(parseFitbitCsvString(testData, 0, 3)).toEqual(expectedMap)
+      ['This', ['10', '20', '30']],
+      ['Is', [11, 21, 31]],
+      ['A', [12, 22, 32]],
+      ['Test', [13, 23, 33]],
+    ]);
+    expect(parseFitbitCsvString(testData, 0, 3)).toEqual(expectedMap);
   });
   test('Non-zero start line returns correct Map', () => {
-    let testData: string =
-        `Stuff
+    let testData: string = `Stuff
         Not important
         This, Is, A, Test
         "10", "11", "12", "13"
@@ -276,12 +272,12 @@ describe("parseFitbitCsvString", () => {
         "30", "31", "32", "33"
         "40", "41", "42", "43"`;
     let expectedMap: Map<string, Array<string | number>> = new Map([
-      ["This", ["10", "20", "30"]],
-      ["Is", [11, 21, 31]],
-      ["A", [12, 22, 32]],
-      ["Test", [13, 23, 33]],
-    ])
-    expect(parseFitbitCsvString(testData, 2, 5)).toEqual(expectedMap)
+      ['This', ['10', '20', '30']],
+      ['Is', [11, 21, 31]],
+      ['A', [12, 22, 32]],
+      ['Test', [13, 23, 33]],
+    ]);
+    expect(parseFitbitCsvString(testData, 2, 5)).toEqual(expectedMap);
   });
 });
 

@@ -242,7 +242,7 @@ export function parseFitbitCsvString(
   const dataEndLine: number = endLine;
   const lines: Array<string> = data.split(/\r\n|\n/);
   const fields: Map<string, Array<string | number>> = new Map();
-  if (lines.length == 0 || lines.length == 1){
+  if (lines.length == 0 || lines.length == 1) {
     return fields;
   }
   const keys: Array<string> = Papa.parse(lines[headerLine])['data'][0] as Array<string>;
