@@ -199,20 +199,59 @@ export function averageOf(data: Array<number>): number {
   }
 }
 
-export function parseFitbitCsvString(data: string, headerLine: number, numberOfLines: number): Map<string, Array<string|number>> {
+/**
+ * Parse the string read from the fitbit "csv" file. This function can read the "activity" or "sleep" data as it simply
+ * returns a map/dictionary of the data where the keys are the data's columns and the values are arrays containing the
+ * ordered data within the rows. This function assumes that the first row of the data to be stored is immediately
+ * following the header line. The end line specified will be included in the parsing.
+ *
+ * For activity data, the keys are:
+ *  - Date
+ *  - Calories Burned
+ *  - Steps
+ *  - Distance
+ *  - Floors
+ *  - Minutes Sedentary
+ *  - Minutes Lightly Active
+ *  - Minutes Fairly Active
+ *  - Minutes Very Active
+ *  - Activity Calories
+ *
+ * For sleep, the keys are:
+ *  - Start Time
+ *  - End Time
+ *  - Minutes Asleep
+ *  - Minutes Awake
+ *  - Number of Awakenings
+ *  - Time in Bed
+ *  - Minutes REM Sleep
+ *  - Minutes Light Sleep
+ *  - Minutes Deep Sleep
+ *
+ * @param data - The full data string read from the csv file
+ * @param headerLine - The line number of the header row (zero based indexing)
+ * @param endLine - The line number of the last row to be read, inclusively (zero based indexing)
+ * @return Map/dictionary of the data within the specified range
+ */
+export function parseFitbitCsvString(
+  data: string,
+  headerLine: number,
+  endLine: number,
+): Map<string, Array<string | number>> {
   const dataStartLine: number = headerLine + 1;
-  const dataEndLine:number = dataStartLine + numberOfLines;
+  const dataEndLine: number = endLine;
   const lines: Array<string> = data.split(/\r\n|\n/);
-  const keys: Array<string> = Papa.parse(lines[headerLine])["data"][0] as Array<string>;   // Cast as Array<string>
-  const fields: Map<string, Array<string|number>> = new Map();
-  for (let i = 0; i < keys.length; i++) {
-    fields.set(keys[i], [])
+  const keys: Array<string> = Papa.parse(lines[headerLine])['data'][0] as Array<string>;
+  const fields: Map<string, Array<string | number>> = new Map();
+  for (let i: number = 0; i < keys.length; i++) {
+    fields.set(keys[i], []);
   }
-  for (let i = dataStartLine; i < dataEndLine; i++) {
-    const row: Array<string> = Papa.parse(lines[i])["data"][0] as Array<string>;
-    for (let j = 0; j < row.length; j++) {
-      let data: string|number = row[j];
-      if (j !== 0) {   // Column 0 is the date
+  for (let i: number = dataStartLine; i < dataEndLine; i++) {
+    const row: Array<string> = Papa.parse(lines[i])['data'][0] as Array<string>;
+    for (let j: number = 0; j < row.length; j++) {
+      let data: string | number = row[j];
+      if (j !== 0) {
+        // Column 0 is the date
         data = Number(data.replace(/,/g, ''));
       }
       // @ts-ignore
