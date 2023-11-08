@@ -203,7 +203,8 @@ export function averageOf(data: Array<number>): number {
  * Parse the string read from the fitbit "csv" file. This function can read the "activity" or "sleep" data as it simply
  * returns a map/dictionary of the data where the keys are the data's columns and the values are arrays containing the
  * ordered data within the rows. This function assumes that the first row of the data to be stored is immediately
- * following the header line. The end line specified will be included in the parsing.
+ * following the header line. The end line specified will be included in the parsing. Any quotations and commas within
+ * the data will be parsed out except if they exist in the header row, which contains keys for the dictionary.
  *
  * For activity data, the keys are:
  *  - Date
