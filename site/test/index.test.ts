@@ -237,6 +237,18 @@ describe('parseFitbitCsvString', () => {
     ]);
     expect(parseFitbitCsvString(testData, 0, 0)).toEqual(expectedMap);
   });
+  test('Start line not index 0 returns Map with keys and empty lists', () => {
+    let testData: string = `This, Is, A, Test
+        "10", "11", "12", "13"
+        "20", "21", "22", "23"`;
+    let expectedMap: Map<string, Array<string | number>> = new Map([
+      ['"10"', []],
+      ['"11"', []],
+      ['"12"', []],
+      ['"13"', []],
+    ]);
+    expect(parseFitbitCsvString(testData, 1, 1)).toEqual(expectedMap);
+  });
   test('End line before start lines returns Map with keys and empty lists', () => {
     let testData: string = `This, Is, A, Test
         "10", "11", "12", "13"
