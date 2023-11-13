@@ -5,7 +5,8 @@
   "main": "site/index.js",
   "scripts": {
     "test": "jest",
-    "format": "prettier --write \"site/**/*.ts\""
+    "format": "prettier --write \"site/**/*.ts\"",
+    "build": "tsc -p tsconfig.json"
   },
   "keywords": [],
   "author": "J. Hughes",
