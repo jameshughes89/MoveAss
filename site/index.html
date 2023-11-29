@@ -5,6 +5,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="src/index.js"></script>
     <style>
         .custom-container {
             margin: 10px;
@@ -16,9 +17,23 @@
 
 <div class="container custom-container">
 
-Movement Assessment
+    <div id="loadFile" style="margin-bottom:1cm;">
+        <input type="file" id="fileInput" />
+        <button id="submitFile" onclick="handleFile()">Load CSV</button>
+    </div>
+
+    <div id="dobWeightHeight" style="display: none; margin-bottom:1cm;">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob">
+        <label for="weightLb">Weight (lbs)</label>
+        <input type="number" id="weightLb">
+        <label for="heightCm">Height (cm)</label>
+        <input type="number" id="heightCm">
+        <input type="submit" id="submitDobWeightHeight" onclick="handleDobWeightHeight()">
+    </div>
 
 </div>
+
 </body>
 </html>
 
