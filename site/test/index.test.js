@@ -1,4 +1,4 @@
-import {
+const {
   COLOUR_UNDERWEIGHT,
   COLOUR_NORMAL_WEIGHT,
   COLOUR_OVERWEIGHT,
@@ -12,16 +12,16 @@ import {
   activityTargetFromAge,
   ageFromDobAsOfDay,
   averageOf,
+  bmiKgM,
   bmiCategory,
   bmiCategoryColour,
-  bmiKgM,
   didPassActivityTarget,
   didPassSedentaryTarget,
   didPasSleepTarget,
   didPassColour,
   parseFitbitCsvString,
   sumOf,
-} from '../src';
+} = require('../src');
 
 describe('activityTargetFromAge', () => {
   test('Age of 17 returns outside 18 -- 65 target', () => {
@@ -226,10 +226,10 @@ describe('parseFitbitCsvString', () => {
     expect(parseFitbitCsvString('', 101, 101)).toEqual(new Map());
   });
   test('No lines specified to read with start/end line returns Map with keys and empty lists', () => {
-    let testData: string = `This, Is, A, Test
+    let testData = `This, Is, A, Test
         "10", "11", "12", "13"
         "20", "21", "22", "23"`;
-    let expectedMap: Map<string, Array<string | number>> = new Map([
+    let expectedMap = new Map([
       ['This', []],
       ['Is', []],
       ['A', []],
@@ -238,10 +238,10 @@ describe('parseFitbitCsvString', () => {
     expect(parseFitbitCsvString(testData, 0, 0)).toEqual(expectedMap);
   });
   test('Start line not index 0 returns Map with keys and empty lists', () => {
-    let testData: string = `This, Is, A, Test
+    let testData = `This, Is, A, Test
         "10", "11", "12", "13"
         "20", "21", "22", "23"`;
-    let expectedMap: Map<string, Array<string | number>> = new Map([
+    let expectedMap = new Map([
       ['"10"', []],
       ['"11"', []],
       ['"12"', []],
@@ -250,10 +250,10 @@ describe('parseFitbitCsvString', () => {
     expect(parseFitbitCsvString(testData, 1, 1)).toEqual(expectedMap);
   });
   test('End line before start lines returns Map with keys and empty lists', () => {
-    let testData: string = `This, Is, A, Test
+    let testData = `This, Is, A, Test
         "10", "11", "12", "13"
         "20", "21", "22", "23"`;
-    let expectedMap: Map<string, Array<string | number>> = new Map([
+    let expectedMap = new Map([
       ['This', []],
       ['Is', []],
       ['A', []],
@@ -262,10 +262,10 @@ describe('parseFitbitCsvString', () => {
     expect(parseFitbitCsvString(testData, 0, -1)).toEqual(expectedMap);
   });
   test('One line specified to read with start/end line returns correct Map', () => {
-    let testData: string = `This, Is, A, Test
+    let testData = `This, Is, A, Test
         "10", "11", "12", "13"
         "20", "21", "22", "23"`;
-    let expectedMap: Map<string, Array<string | number>> = new Map([
+    let expectedMap = new Map([
       ['This', ['10']],
       ['Is', [11]],
       ['A', [12]],
@@ -274,12 +274,12 @@ describe('parseFitbitCsvString', () => {
     expect(parseFitbitCsvString(testData, 0, 1)).toEqual(expectedMap);
   });
   test('Multiple line specified to read with start/end line returns correct Map', () => {
-    let testData: string = `This, Is, A, Test
+    let testData = `This, Is, A, Test
         "10", "11", "12", "13"
         "20", "21", "22", "23"
         "30", "31", "32", "33"
         "40", "41", "42", "43"`;
-    let expectedMap: Map<string, Array<string | number>> = new Map([
+    let expectedMap = new Map([
       ['This', ['10', '20', '30']],
       ['Is', [11, 21, 31]],
       ['A', [12, 22, 32]],
@@ -288,14 +288,14 @@ describe('parseFitbitCsvString', () => {
     expect(parseFitbitCsvString(testData, 0, 3)).toEqual(expectedMap);
   });
   test('Non-zero start line returns correct Map', () => {
-    let testData: string = `Stuff
+    let testData = `Stuff
         Not important
         This, Is, A, Test
         "10", "11", "12", "13"
         "20", "21", "22", "23"
         "30", "31", "32", "33"
         "40", "41", "42", "43"`;
-    let expectedMap: Map<string, Array<string | number>> = new Map([
+    let expectedMap = new Map([
       ['This', ['10', '20', '30']],
       ['Is', [11, 21, 31]],
       ['A', [12, 22, 32]],
