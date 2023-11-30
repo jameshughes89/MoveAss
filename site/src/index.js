@@ -261,7 +261,129 @@ function plotSedentaryTime() {
   averageSedentaryTimeSummary.innerText = 'Average Sedentary Minutes/Day: '.concat(averageSedentaryTime.toFixed(1));
 }
 
-function plotSleepTime() {}
+function plotSleepTime() {
+  physicalActivitySummary.style.display = 'none';
+  sedentaryTimeSummary.style.display = 'none';
+  sleepTimeSummary.style.display = 'block';
+
+  let dates = sleepData.get('Start Time');
+  let minutesAsleep = sleepData.get('Minutes Asleep');
+  let averageSleepTime = averageOf(minutesAsleep);
+
+  let minutesAsleepAfterTargetCheck = [];
+  let minutesAsleepAboveBelowTarget = [];
+  for (let i = 0; i < dates.length; i++) {
+    if (minutesAsleep[i] > TARGET_SLEEP_MAXIMUM_MINUTES) {
+      minutesAsleepAfterTargetCheck.push(TARGET_SLEEP_MAXIMUM_MINUTES);
+      minutesAsleepAboveBelowTarget.push(minutesAsleep[i] - TARGET_SLEEP_MAXIMUM_MINUTES);
+    } else if (minutesAsleep[i] < TARGET_SLEEP_MINIMUM_MINUTES) {
+      minutesAsleepAfterTargetCheck.push(minutesAsleep[i]);
+      minutesAsleepAboveBelowTarget.push(TARGET_SLEEP_MINIMUM_MINUTES - minutesAsleep[i]);
+    } else {
+      minutesAsleepAfterTargetCheck.push(minutesAsleep[i]);
+      minutesAsleepAboveBelowTarget.push(0);
+    }
+  }
+
+  const minutesBelowMaxTarget = {
+    x: dates,
+    y: minutesAsleepAfterTargetCheck,
+    type: 'bar',
+    name: 'Minutes Asleep',
+  };
+  const minutesAboveMaxTarget = {
+    x: dates,
+    y: minutesAsleepAboveBelowTarget,
+    type: 'bar',
+    name: 'Minutes Asleep Above/Below Target',
+    marker: {
+      color: 'red',
+    },
+  };
+  const targetMaximum = {
+    x: [dates[0]],
+    y: [TARGET_SLEEP_MAXIMUM_MINUTES],
+    mode: 'text',
+    text: ['Target Maximum'],
+    font: {
+      color: 'black',
+    },
+    hoverinfo: 'skip',
+    showlegend: false,
+  };
+  const targetMinimum = {
+    x: [dates[0]],
+    y: [TARGET_SLEEP_MINIMUM_MINUTES],
+    mode: 'text',
+    text: ['Target Minimum'],
+    font: {
+      color: 'black',
+    },
+    hoverinfo: 'skip',
+    showlegend: false,
+  };
+  const average = {
+    x: [dates[0]],
+    y: [averageSleepTime],
+    mode: 'text',
+    text: ['Average'],
+    font: {
+      color: sleepColour,
+    },
+    hoverinfo: 'skip',
+    showlegend: false,
+  };
+  const layout = {
+    title: 'Sleep Time',
+    xaxis: {
+      title: 'Sleep Start Time',
+    },
+    yaxis: {
+      title: 'Minutes',
+    },
+    barmode: 'stack',
+    shapes: [
+      {
+        type: 'line',
+        xref: 'paper',
+        x0: 0,
+        y0: averageSleepTime,
+        x1: 1,
+        y1: averageSleepTime,
+        line: {
+          color: sedentaryColour,
+          width: 1.5,
+        },
+      },
+      {
+        type: 'line',
+        xref: 'paper',
+        x0: 0,
+        y0: TARGET_SLEEP_MAXIMUM_MINUTES,
+        x1: 1,
+        y1: TARGET_SLEEP_MAXIMUM_MINUTES,
+        line: {
+          color: 'black',
+          width: 1.5,
+        },
+      },
+      {
+        type: 'line',
+        xref: 'paper',
+        x0: 0,
+        y0: TARGET_SLEEP_MINIMUM_MINUTES,
+        x1: 1,
+        y1: TARGET_SLEEP_MINIMUM_MINUTES,
+        line: {
+          color: 'black',
+          width: 1.5,
+        },
+      },
+    ],
+  };
+  Plotly.newPlot('plot', [minutesBelowMaxTarget, minutesAboveMaxTarget, targetMaximum, targetMinimum, average], layout);
+  averageSleepTimeSummary.innerText = 'Average Sleep Hours/Day: '.concat((averageSleepTime / 60).toFixed(1));
+}
 
 /**
  * Get the weekly activity target for an individual based on their age.
