@@ -36,7 +36,21 @@ function handleFile() {
   reader.readAsText(file);
 }
 
-function handleDobWeightHeight() {}
+function handleDobWeightHeight() {
+
+}
+
+function plotPhysicalActivity(){
+
+}
+
+function plotSedentaryTime(){
+
+}
+
+function plotSleepTime(){
+
+}
 
 /**
  * Get the weekly activity target for an individual based on their age.

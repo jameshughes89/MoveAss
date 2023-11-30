@@ -32,6 +32,29 @@
         <input type="submit" id="submitDobWeightHeight" onclick="handleDobWeightHeight()">
     </div>
 
+    <div id="bmiSummary" style="display: none;">
+        <label for="bmiAndClass">BMI</label>
+        <div id="bmiAndClass"></div>
+        <button id="physicalActivity" onclick="plotPhysicalActivity()">Physical Activity</button>
+        <button id="sedentaryTime" onclick="plotSedentaryTime()">Sedentary Time</button>
+        <button id="sleepTime" onclick="plotSleepTime()">Sleep Time</button>
+    </div>
+
+    <div id="plot"></div>
+
+    <div id="physicalActivitySummary" style="display: none;">
+        <div id="averageStepsSummary"></div>
+        <div id="averageModerateVigorousSummary"></div>
+    </div>
+
+    <div id="sedentaryTimeSummary" style="display: none;">
+        <div id="averageSedentaryTimeSummary"></div>
+    </div>
+
+    <div id="sleepTimeSummary" style="display: none;">
+        <div id="averageSleepTimeSummary"></div>
+    </div>
+
 </div>
 
 </body>
