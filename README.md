@@ -5,8 +5,9 @@ Movement assessment application for fitbit
 
 ## Running
 
-Open `index.html`
+Locally, open `index.html`
 
+[Live website can be found here](http://modsurski.com/moveass/) 
 
 ## Developing
 
