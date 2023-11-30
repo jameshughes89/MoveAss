@@ -22,6 +22,8 @@ const TARGET_SLEEP_MAXIMUM_MINUTES = 540;
 
 let activityData;
 let sleepData;
+let activityTarget;
+let activityColour;
 
 function handleFile() {
   const file = document.getElementById('fileInput').files[0];
@@ -55,11 +57,11 @@ function handleDobWeightHeight() {
   const dobAsDate = new Date(dob);
   const today = new Date();
   const age = ageFromDobAsOfDay(dobAsDate, today);
-  const activityTarget = activityTargetFromAge(age);
+  activityTarget = activityTargetFromAge(age);
   const totalModerateVigorousActivity =
     sumOf(activityData.get('Minutes Fairly Active')) + sumOf(activityData.get('Minutes Very Active'));
   const didPassActivity = didPassActivityTarget(totalModerateVigorousActivity, activityTarget);
-  const activityColour = didPassColour(didPassActivity);
+  activityColour = didPassColour(didPassActivity);
   physicalActivity.style.backgroundColor = activityColour;
 
   const didPassSedentary = didPassSedentaryTarget(activityData.get('Minutes Sedentary'));
@@ -71,11 +73,96 @@ function handleDobWeightHeight() {
   sleepTime.style.backgroundColor = sleepColour;
 }
 
-function plotPhysicalActivity() {}
+function plotPhysicalActivity() {
+  physicalActivitySummary.style.display = "block";
+  sedentaryTimeSummary.style.display = "none";
+  sleepTimeSummary.style.display = "none";
+
+  let dates = activityData.get("Date");
+  let minutesModerate = activityData.get("Minutes Fairly Active");
+  let minutesVigorous = activityData.get("Minutes Very Active");
+  let averageSteps = averageOf(activityData.get("Steps"));
+  let averageModerateVigorous = averageOf(minutesModerate.concat(minutesVigorous));
+
+  const moderate = {
+    x: dates,
+    y: minutesModerate,
+    name: "Moderate",
+    type: 'bar',
+  };
+  const vigorous = {
+    x: dates,
+    y: minutesVigorous,
+    name: "Vigorous",
+    type: 'bar',
+  };
+  const averageTarget = {
+    x: [dates[0]],
+    y: [activityTarget/dates.length],
+    mode: 'text',
+    text: ['Average Target'],
+    font: {
+      color: "black",
+    },
+    hoverinfo: 'skip',
+    showlegend: false
+  };
+  const average = {
+    x: [dates[0]],
+    y: [averageModerateVigorous],
+    mode: 'text',
+    text: ['Average'],
+    font: {
+      color: activityColour,
+    },
+    hoverinfo: 'skip',
+    showlegend: false
+  };
+  const layout = {
+    title: 'Physical Activity Time',
+    xaxis: {
+      title: 'Dates'
+    },
+    yaxis: {
+      title: 'Minutes'
+    },
+    barmode: "stack",
+    shapes: [
+      {
+        type: 'line',
+        xref: 'paper',
+        x0: 0,
+        y0: averageModerateVigorous,
+        x1: 1,
+        y1: averageModerateVigorous,
+        line:{
+          color: activityColour,
+          width: 1.5,
+        }
+      },
+      {
+        type: 'line',
+        xref: 'paper',
+        x0: 0,
+        y0: activityTarget/dates.length,
+        x1: 1,
+        y1: activityTarget/dates.length,
+        line:{
+          color: "black",
+          width: 1.5,
+        }
+      }
+    ]
+  };
+  Plotly.newPlot('plot', [moderate, vigorous, average, averageTarget], layout);
+  averageStepsSummary.innerText = "Average Steps/Day: ".concat(averageSteps.toFixed(1));
+  averageModerateVigorousSummary.innerText = "Average Moderate to Vigorous Minutes/Day: ".concat(averageModerateVigorous.toFixed(1));
+}
 
 function plotSedentaryTime() {}
 
 function plotSleepTime() {}
+
 
 /**
  * Get the weekly activity target for an individual based on their age.
