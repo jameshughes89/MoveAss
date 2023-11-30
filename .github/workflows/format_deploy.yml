@@ -38,5 +38,5 @@ jobs:
 
       - name: Copy Files to the Website
         run: |
-          echo "$(ls -la .)"
+          echo "$(ls -l)"
           aws s3 sync site/* s3://modsurski.com/moveass --delete
