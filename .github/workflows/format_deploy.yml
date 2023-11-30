@@ -21,3 +21,21 @@ jobs:
         run: npm install
       - name: Run format script
         run: npm run format
+
+  deploy:
+    needs:
+      - release
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.repository == 'jameshughes89/MoveAss'
+    concurrency: deploying
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Copy Files to the Website
+        run: |
+          aws s3 sync ./site s3://modsurski.com/moveass --delete
