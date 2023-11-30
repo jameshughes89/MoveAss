@@ -37,20 +37,45 @@ function handleFile() {
 }
 
 function handleDobWeightHeight() {
+  const dob = document.getElementById('dob').value;
+  const weightLb = document.getElementById('weightLb').value;
+  const heightCm = document.getElementById('heightCm').value;
 
+  const weightKG = weightLb * KGS_PER_LBS;
+  const heightM = heightCm * M_PER_CM;
+  const bmi = bmiKgM(weightKG, heightM).toFixed(1);
+  const bmiClass = bmiCategory(bmi);
+  const bmiText = bmi.toString().concat(': ', bmiClass);
+
+  bmiSummary.style.display = 'block';
+  bmiAndClass.innerText = bmiText;
+  const bmiColour = bmiCategoryColour(bmi);
+  bmiAndClass.style.backgroundColor = bmiColour;
+
+  const dobAsDate = new Date(dob);
+  const today = new Date();
+  const age = ageFromDobAsOfDay(dobAsDate, today);
+  const activityTarget = activityTargetFromAge(age);
+  const totalModerateVigorousActivity =
+    sumOf(activityData.get('Minutes Fairly Active')) + sumOf(activityData.get('Minutes Very Active'));
+  const didPassActivity = didPassActivityTarget(totalModerateVigorousActivity, activityTarget);
+  const activityColour = didPassColour(didPassActivity);
+  physicalActivity.style.backgroundColor = activityColour;
+
+  const didPassSedentary = didPassSedentaryTarget(activityData.get('Minutes Sedentary'));
+  const sedentaryColour = didPassColour(didPassSedentary);
+  sedentaryTime.style.backgroundColor = sedentaryColour;
+
+  const didPassSleep = didPasSleepTarget(sleepData.get('Minutes Asleep'));
+  const sleepColour = didPassColour(didPassSleep);
+  sleepTime.style.backgroundColor = sleepColour;
 }
 
-function plotPhysicalActivity(){
+function plotPhysicalActivity() {}
 
-}
+function plotSedentaryTime() {}
 
-function plotSedentaryTime(){
-
-}
-
-function plotSleepTime(){
-
-}
+function plotSleepTime() {}
 
 /**
  * Get the weekly activity target for an individual based on their age.
