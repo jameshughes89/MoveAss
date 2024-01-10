@@ -99,7 +99,7 @@ function plotPhysicalActivity() {
     type: 'bar',
   };
   const averageTarget = {
-    x: [dates[0]],
+    x: [dates[dates.length - 1]],
     y: [activityTarget / dates.length],
     mode: 'text',
     text: ['Average Target'],
@@ -200,7 +200,7 @@ function plotSedentaryTime() {
     },
   };
   const target = {
-    x: [dates[0]],
+    x: [dates[dates.length - 1]],
     y: [TARGET_SEDENTARY_MAXIMUM_MINUTES],
     mode: 'text',
     text: ['Target'],
@@ -301,7 +301,7 @@ function plotSleepTime() {
     },
   };
   const targetMaximum = {
-    x: [dates[0]],
+    x: [dates[dates.length - 1]],
     y: [TARGET_SLEEP_MAXIMUM_MINUTES],
     mode: 'text',
     text: ['Target Maximum'],
@@ -312,7 +312,7 @@ function plotSleepTime() {
     showlegend: false,
   };
   const targetMinimum = {
-    x: [dates[0]],
+    x: [dates[dates.length - 1]],
     y: [TARGET_SLEEP_MINIMUM_MINUTES],
     mode: 'text',
     text: ['Target Minimum'],
