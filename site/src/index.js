@@ -102,7 +102,7 @@ function plotPhysicalActivity() {
     x: [dates[dates.length - 1]],
     y: [activityTarget / dates.length],
     mode: 'text',
-    text: ['Average Target'],
+    text: ['Target'],
     font: {
       color: 'black',
     },
@@ -127,6 +127,9 @@ function plotPhysicalActivity() {
     },
     yaxis: {
       title: 'Minutes',
+    },
+    font: {
+      size: 14,
     },
     barmode: 'stack',
     shapes: [
@@ -228,6 +231,9 @@ function plotSedentaryTime() {
     },
     yaxis: {
       title: 'Minutes',
+    },
+    font: {
+      size: 14,
     },
     barmode: 'stack',
     shapes: [
@@ -340,6 +346,9 @@ function plotSleepTime() {
     },
     yaxis: {
       title: 'Minutes',
+    },
+    font: {
+      size: 14,
     },
     barmode: 'stack',
     shapes: [
