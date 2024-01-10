@@ -157,7 +157,7 @@ function plotPhysicalActivity() {
     ],
   };
   Plotly.newPlot('plot', [moderate, vigorous, average, averageTarget], layout);
-  averageStepsSummary.innerText = 'Average Steps/Day: '.concat(averageSteps.toFixed(1));
+  averageStepsSummary.innerText = 'Average Steps/Day: '.concat(averageSteps.toFixed(0));
   averageModerateVigorousSummary.innerText = 'Average Moderate to Vigorous Minutes/Day: '.concat(
     averageModerateVigorous.toFixed(1),
   );
