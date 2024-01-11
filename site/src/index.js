@@ -20,6 +20,13 @@ const TARGET_SEDENTARY_MAXIMUM_MINUTES = 480;
 const TARGET_SLEEP_MINIMUM_MINUTES = 420;
 const TARGET_SLEEP_MAXIMUM_MINUTES = 540;
 
+const PLOT_TEXT_SIZE = 15;
+const PLOT_HORIZONTAL_LINE_WIDTH = 2;
+
+const LABEL_OFFSET_PHYSICAL_ACTIVITY = 2.5;
+const LABEL_OFFSET_SEDENTARY_TIME = 20;
+const LABEL_OFFSET_SLEEP_TIME = 15;
+
 let activityData;
 let sleepData;
 let activityTarget;
@@ -101,7 +108,7 @@ function plotPhysicalActivity() {
   };
   const averageTarget = {
     x: [dates[dates.length - 1]],
-    y: [activityTarget / dates.length],
+    y: [(activityTarget / dates.length) + LABEL_OFFSET_PHYSICAL_ACTIVITY],
     mode: 'text',
     text: ['Target'],
     font: {
@@ -112,7 +119,7 @@ function plotPhysicalActivity() {
   };
   const average = {
     x: [dates[0]],
-    y: [averageModerateVigorous],
+    y: [averageModerateVigorous + LABEL_OFFSET_PHYSICAL_ACTIVITY],
     mode: 'text',
     text: ['Average'],
     font: {
@@ -130,7 +137,7 @@ function plotPhysicalActivity() {
       title: 'Minutes',
     },
     font: {
-      size: 14,
+      size: PLOT_TEXT_SIZE,
     },
     barmode: 'stack',
     shapes: [
@@ -143,7 +150,7 @@ function plotPhysicalActivity() {
         y1: averageModerateVigorous,
         line: {
           color: activityColour,
-          width: 1.5,
+          width: PLOT_HORIZONTAL_LINE_WIDTH,
         },
       },
       {
@@ -155,7 +162,7 @@ function plotPhysicalActivity() {
         y1: activityTarget / dates.length,
         line: {
           color: 'black',
-          width: 1.5,
+          width: PLOT_HORIZONTAL_LINE_WIDTH,
         },
       },
     ],
@@ -208,7 +215,7 @@ function plotSedentaryTime() {
   };
   const target = {
     x: [dates[dates.length - 1]],
-    y: [TARGET_SEDENTARY_MAXIMUM_MINUTES],
+    y: [TARGET_SEDENTARY_MAXIMUM_MINUTES + LABEL_OFFSET_SEDENTARY_TIME],
     mode: 'text',
     text: ['Target'],
     font: {
@@ -219,7 +226,7 @@ function plotSedentaryTime() {
   };
   const average = {
     x: [dates[0]],
-    y: [averageSedentaryTime],
+    y: [averageSedentaryTime + LABEL_OFFSET_SEDENTARY_TIME],
     mode: 'text',
     text: ['Average'],
     font: {
@@ -237,7 +244,7 @@ function plotSedentaryTime() {
       title: 'Minutes',
     },
     font: {
-      size: 14,
+      size: PLOT_TEXT_SIZE,
     },
     barmode: 'stack',
     shapes: [
@@ -250,7 +257,7 @@ function plotSedentaryTime() {
         y1: averageSedentaryTime,
         line: {
           color: sedentaryColour,
-          width: 1.5,
+          width: PLOT_HORIZONTAL_LINE_WIDTH,
         },
       },
       {
@@ -262,7 +269,7 @@ function plotSedentaryTime() {
         y1: TARGET_SEDENTARY_MAXIMUM_MINUTES,
         line: {
           color: 'black',
-          width: 1.5,
+          width: PLOT_HORIZONTAL_LINE_WIDTH,
         },
       },
     ],
@@ -312,9 +319,9 @@ function plotSleepTime() {
   };
   const targetMaximum = {
     x: [dates[dates.length - 1]],
-    y: [TARGET_SLEEP_MAXIMUM_MINUTES],
+    y: [TARGET_SLEEP_MAXIMUM_MINUTES + LABEL_OFFSET_SLEEP_TIME],
     mode: 'text',
-    text: ['Target Maximum'],
+    text: ['Target Max'],
     font: {
       color: 'black',
     },
@@ -323,9 +330,9 @@ function plotSleepTime() {
   };
   const targetMinimum = {
     x: [dates[dates.length - 1]],
-    y: [TARGET_SLEEP_MINIMUM_MINUTES],
+    y: [TARGET_SLEEP_MINIMUM_MINUTES + LABEL_OFFSET_SLEEP_TIME],
     mode: 'text',
-    text: ['Target Minimum'],
+    text: ['Target Min'],
     font: {
       color: 'black',
     },
@@ -334,7 +341,7 @@ function plotSleepTime() {
   };
   const average = {
     x: [dates[0]],
-    y: [averageSleepTime],
+    y: [averageSleepTime + LABEL_OFFSET_SLEEP_TIME],
     mode: 'text',
     text: ['Average'],
     font: {
@@ -352,7 +359,7 @@ function plotSleepTime() {
       title: 'Minutes',
     },
     font: {
-      size: 14,
+      size: PLOT_TEXT_SIZE,
     },
     barmode: 'stack',
     shapes: [
@@ -365,7 +372,7 @@ function plotSleepTime() {
         y1: averageSleepTime,
         line: {
           color: sedentaryColour,
-          width: 1.5,
+          width: PLOT_HORIZONTAL_LINE_WIDTH,
         },
       },
       {
@@ -377,7 +384,7 @@ function plotSleepTime() {
         y1: TARGET_SLEEP_MAXIMUM_MINUTES,
         line: {
           color: 'black',
-          width: 1.5,
+          width: PLOT_HORIZONTAL_LINE_WIDTH,
         },
       },
       {
@@ -389,7 +396,7 @@ function plotSleepTime() {
         y1: TARGET_SLEEP_MINIMUM_MINUTES,
         line: {
           color: 'black',
-          width: 1.5,
+          width: PLOT_HORIZONTAL_LINE_WIDTH,
         },
       },
     ],
