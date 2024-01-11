@@ -85,6 +85,7 @@ function plotPhysicalActivity() {
   let minutesVigorous = activityData.get('Minutes Very Active');
   let averageSteps = averageOf(activityData.get('Steps'));
   let averageModerateVigorous = averageOf(minutesModerate.concat(minutesVigorous));
+  let totalModerateVigorous = sumOf(minutesModerate.concat(minutesVigorous));
 
   const moderate = {
     x: dates,
@@ -163,6 +164,9 @@ function plotPhysicalActivity() {
   averageStepsSummary.innerText = 'Average Steps/Day: '.concat(averageSteps.toFixed(0));
   averageModerateVigorousSummary.innerText = 'Average Moderate to Vigorous Minutes/Day: '.concat(
     averageModerateVigorous.toFixed(1),
+  );
+  totalModerateVigorousSummary.innerText = 'Total Moderate to Vigorous Minutes: '.concat(
+    totalModerateVigorous.toFixed(1),
   );
 }
 
