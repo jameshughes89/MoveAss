@@ -165,7 +165,7 @@ function plotPhysicalActivity() {
   averageModerateVigorousSummary.innerText = 'Average Moderate to Vigorous Minutes/Day: '.concat(
     averageModerateVigorous.toFixed(1),
   );
-  totalModerateVigorousSummary.innerText = 'Total Moderate to Vigorous Minutes: '.concat(
+  totalModerateVigorousSummary.innerText = 'Total Moderate to Vigorous Minutes/Week: '.concat(
     totalModerateVigorous.toFixed(1),
   );
 }
