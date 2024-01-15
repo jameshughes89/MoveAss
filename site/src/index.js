@@ -27,7 +27,7 @@ const PLOT_TEXT_SIZE = 15;
 const PLOT_HORIZONTAL_LINE_WIDTH = 2;
 
 const LABEL_OFFSET_PHYSICAL_ACTIVITY = 2.5;
-const LABEL_OFFSET_SEDENTARY_TIME = 20;
+const LABEL_OFFSET_SEDENTARY_TIME = 0.5;
 const LABEL_OFFSET_SLEEP_TIME = 15;
 
 let activityData;
@@ -187,29 +187,30 @@ function plotSedentaryTime() {
 
   let dates = activityData.get('Date');
   let minutesSedentary = activityData.get('Minutes Sedentary');
-  let averageSedentaryTime = averageOf(minutesSedentary);
+  let hoursSedentary = convertToHours(minutesSedentary);
+  let averageSedentaryTime = averageOf(hoursSedentary);
 
-  let minutesSedentaryBelowTarget = [];
-  let minutesSedentaryAboveTarget = [];
+  let hoursSedentaryBelowTarget = [];
+  let hoursSedentaryAboveTarget = [];
   for (let i = 0; i < dates.length; i++) {
-    if (minutesSedentary[i] > TARGET_SEDENTARY_MAXIMUM_MINUTES) {
-      minutesSedentaryBelowTarget.push(TARGET_SEDENTARY_MAXIMUM_MINUTES);
-      minutesSedentaryAboveTarget.push(minutesSedentary[i] - TARGET_SEDENTARY_MAXIMUM_MINUTES);
+    if (hoursSedentary[i] > TARGET_SEDENTARY_MAXIMUM_HOURS) {
+      hoursSedentaryBelowTarget.push(TARGET_SEDENTARY_MAXIMUM_HOURS);
+      hoursSedentaryAboveTarget.push(hoursSedentary[i] - TARGET_SEDENTARY_MAXIMUM_HOURS);
     } else {
-      minutesSedentaryBelowTarget.push(minutesSedentary[i]);
-      minutesSedentaryAboveTarget.push(0);
+      hoursSedentaryBelowTarget.push(hoursSedentary[i]);
+      hoursSedentaryAboveTarget.push(0);
     }
   }
 
-  const minutesBelowTarget = {
+  const hoursBelowTarget = {
     x: dates,
-    y: minutesSedentaryBelowTarget,
+    y: hoursSedentaryBelowTarget,
     type: 'bar',
     name: 'Sedentary Time',
   };
-  const minutesAboveTarget = {
+  const hoursAboveTarget = {
     x: dates,
-    y: minutesSedentaryAboveTarget,
+    y: hoursSedentaryAboveTarget,
     type: 'bar',
     name: 'Sedentary Time Above Target',
     marker: {
@@ -218,7 +219,7 @@ function plotSedentaryTime() {
   };
   const target = {
     x: [dates[dates.length - 1]],
-    y: [TARGET_SEDENTARY_MAXIMUM_MINUTES + LABEL_OFFSET_SEDENTARY_TIME],
+    y: [TARGET_SEDENTARY_MAXIMUM_HOURS + LABEL_OFFSET_SEDENTARY_TIME],
     mode: 'text',
     text: ['Target'],
     font: {
@@ -267,9 +268,9 @@ function plotSedentaryTime() {
         type: 'line',
         xref: 'paper',
         x0: 0,
-        y0: TARGET_SEDENTARY_MAXIMUM_MINUTES,
+        y0: TARGET_SEDENTARY_MAXIMUM_HOURS,
         x1: 1,
-        y1: TARGET_SEDENTARY_MAXIMUM_MINUTES,
+        y1: TARGET_SEDENTARY_MAXIMUM_HOURS,
         line: {
           color: 'black',
           width: PLOT_HORIZONTAL_LINE_WIDTH,
@@ -277,8 +278,8 @@ function plotSedentaryTime() {
       },
     ],
   };
-  Plotly.newPlot('plot', [minutesBelowTarget, minutesAboveTarget, target, average], layout);
-  averageSedentaryTimeSummary.innerText = 'Average Sedentary Minutes/Day: '.concat(averageSedentaryTime.toFixed(1));
+  Plotly.newPlot('plot', [hoursBelowTarget, hoursAboveTarget, target, average], layout);
+  averageSedentaryTimeSummary.innerText = 'Average Sedentary Hours/Day: '.concat(averageSedentaryTime.toFixed(1));
 }
 
 function plotSleepTime() {
