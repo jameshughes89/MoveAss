@@ -647,6 +647,20 @@ function sumOf(data) {
   return runningTotal;
 }
 
+/**
+ * Convert the data from minutes to hours with decimal.
+ *
+ * @param dataInMinutes - The array of time in minutes to convert to hours
+ * @return An array of time in hours
+ */
+function convertToHours(dataInMinutes){
+  let dataInHours = Array(dataInMinutes.length);
+  for (let i = 0; i < dataInHours.length; i++) {
+    dataInHours[i] = dataInMinutes[i]/60;
+  }
+  return dataInHours;
+}
+
 // module.exports = {
 //   COLOUR_UNDERWEIGHT,
 //   COLOUR_NORMAL_WEIGHT,
@@ -670,4 +684,5 @@ function sumOf(data) {
 //   didPassColour,
 //   parseFitbitCsvString,
 //   sumOf,
+//    convertToHours,
 // };
