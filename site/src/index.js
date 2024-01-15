@@ -108,7 +108,7 @@ function plotPhysicalActivity() {
   };
   const averageTarget = {
     x: [dates[dates.length - 1]],
-    y: [(activityTarget / dates.length) + LABEL_OFFSET_PHYSICAL_ACTIVITY],
+    y: [activityTarget / dates.length + LABEL_OFFSET_PHYSICAL_ACTIVITY],
     mode: 'text',
     text: ['Target'],
     font: {
@@ -653,10 +653,10 @@ function sumOf(data) {
  * @param dataInMinutes - The array of time in minutes to convert to hours
  * @return An array of time in hours
  */
-function convertToHours(dataInMinutes){
+function convertToHours(dataInMinutes) {
   let dataInHours = Array(dataInMinutes.length);
   for (let i = 0; i < dataInHours.length; i++) {
-    dataInHours[i] = dataInMinutes[i]/60;
+    dataInHours[i] = dataInMinutes[i] / 60;
   }
   return dataInHours;
 }
