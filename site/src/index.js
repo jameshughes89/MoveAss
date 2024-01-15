@@ -28,7 +28,7 @@ const PLOT_HORIZONTAL_LINE_WIDTH = 2;
 
 const LABEL_OFFSET_PHYSICAL_ACTIVITY = 2.5;
 const LABEL_OFFSET_SEDENTARY_TIME = 0.5;
-const LABEL_OFFSET_SLEEP_TIME = 15;
+const LABEL_OFFSET_SLEEP_TIME = 0.25;
 
 let activityData;
 let sleepData;
@@ -245,7 +245,7 @@ function plotSedentaryTime() {
       title: 'Dates',
     },
     yaxis: {
-      title: 'Minutes',
+      title: 'Hours',
     },
     font: {
       size: PLOT_TEXT_SIZE,
@@ -289,41 +289,42 @@ function plotSleepTime() {
 
   let dates = sleepData.get('Start Time');
   let minutesAsleep = sleepData.get('Minutes Asleep');
-  let averageSleepTime = averageOf(minutesAsleep);
+  let hoursAsleep = convertToHours(minutesAsleep);
+  let averageSleepTime = averageOf(hoursAsleep);
 
-  let minutesAsleepAfterTargetCheck = [];
-  let minutesAsleepAboveBelowTarget = [];
+  let hoursAsleepAfterTargetCheck = [];
+  let hoursAsleepAboveBelowTarget = [];
   for (let i = 0; i < dates.length; i++) {
-    if (minutesAsleep[i] > TARGET_SLEEP_MAXIMUM_MINUTES) {
-      minutesAsleepAfterTargetCheck.push(TARGET_SLEEP_MAXIMUM_MINUTES);
-      minutesAsleepAboveBelowTarget.push(minutesAsleep[i] - TARGET_SLEEP_MAXIMUM_MINUTES);
-    } else if (minutesAsleep[i] < TARGET_SLEEP_MINIMUM_MINUTES) {
-      minutesAsleepAfterTargetCheck.push(minutesAsleep[i]);
-      minutesAsleepAboveBelowTarget.push(TARGET_SLEEP_MINIMUM_MINUTES - minutesAsleep[i]);
+    if (hoursAsleep[i] > TARGET_SLEEP_MAXIMUM_HOURS) {
+      hoursAsleepAfterTargetCheck.push(TARGET_SLEEP_MAXIMUM_HOURS);
+      hoursAsleepAboveBelowTarget.push(hoursAsleep[i] - TARGET_SLEEP_MAXIMUM_HOURS);
+    } else if (hoursAsleep[i] < TARGET_SLEEP_MINIMUM_HOURS) {
+      hoursAsleepAfterTargetCheck.push(hoursAsleep[i]);
+      hoursAsleepAboveBelowTarget.push(TARGET_SLEEP_MINIMUM_HOURS - hoursAsleep[i]);
     } else {
-      minutesAsleepAfterTargetCheck.push(minutesAsleep[i]);
-      minutesAsleepAboveBelowTarget.push(0);
+      hoursAsleepAfterTargetCheck.push(hoursAsleep[i]);
+      hoursAsleepAboveBelowTarget.push(0);
     }
   }
 
-  const minutesBelowMaxTarget = {
+  const hoursBelowMaxTarget = {
     x: dates,
-    y: minutesAsleepAfterTargetCheck,
+    y: hoursAsleepAfterTargetCheck,
     type: 'bar',
-    name: 'Minutes Asleep',
+    name: 'Hours Asleep',
   };
-  const minutesAboveMaxTarget = {
+  const hoursAboveMaxTarget = {
     x: dates,
-    y: minutesAsleepAboveBelowTarget,
+    y: hoursAsleepAboveBelowTarget,
     type: 'bar',
-    name: 'Minutes Asleep Above/Below Target',
+    name: 'Hours Asleep Above/Below Target',
     marker: {
       color: 'red',
     },
   };
   const targetMaximum = {
     x: [dates[dates.length - 1]],
-    y: [TARGET_SLEEP_MAXIMUM_MINUTES + LABEL_OFFSET_SLEEP_TIME],
+    y: [TARGET_SLEEP_MAXIMUM_HOURS + LABEL_OFFSET_SLEEP_TIME],
     mode: 'text',
     text: ['Target Max'],
     font: {
@@ -334,7 +335,7 @@ function plotSleepTime() {
   };
   const targetMinimum = {
     x: [dates[dates.length - 1]],
-    y: [TARGET_SLEEP_MINIMUM_MINUTES + LABEL_OFFSET_SLEEP_TIME],
+    y: [TARGET_SLEEP_MINIMUM_HOURS + LABEL_OFFSET_SLEEP_TIME],
     mode: 'text',
     text: ['Target Min'],
     font: {
@@ -360,7 +361,7 @@ function plotSleepTime() {
       title: 'Sleep Start Time',
     },
     yaxis: {
-      title: 'Minutes',
+      title: 'Hours',
     },
     font: {
       size: PLOT_TEXT_SIZE,
@@ -383,9 +384,9 @@ function plotSleepTime() {
         type: 'line',
         xref: 'paper',
         x0: 0,
-        y0: TARGET_SLEEP_MAXIMUM_MINUTES,
+        y0: TARGET_SLEEP_MAXIMUM_HOURS,
         x1: 1,
-        y1: TARGET_SLEEP_MAXIMUM_MINUTES,
+        y1: TARGET_SLEEP_MAXIMUM_HOURS,
         line: {
           color: 'black',
           width: PLOT_HORIZONTAL_LINE_WIDTH,
@@ -395,9 +396,9 @@ function plotSleepTime() {
         type: 'line',
         xref: 'paper',
         x0: 0,
-        y0: TARGET_SLEEP_MINIMUM_MINUTES,
+        y0: TARGET_SLEEP_MINIMUM_HOURS,
         x1: 1,
-        y1: TARGET_SLEEP_MINIMUM_MINUTES,
+        y1: TARGET_SLEEP_MINIMUM_HOURS,
         line: {
           color: 'black',
           width: PLOT_HORIZONTAL_LINE_WIDTH,
@@ -405,8 +406,8 @@ function plotSleepTime() {
       },
     ],
   };
-  Plotly.newPlot('plot', [minutesBelowMaxTarget, minutesAboveMaxTarget, targetMaximum, targetMinimum, average], layout);
-  averageSleepTimeSummary.innerText = 'Average Sleep Hours/Day: '.concat((averageSleepTime / 60).toFixed(1));
+  Plotly.newPlot('plot', [hoursBelowMaxTarget, hoursAboveMaxTarget, targetMaximum, targetMinimum, average], layout);
+  averageSleepTimeSummary.innerText = 'Average Sleep Hours/Day: '.concat((averageSleepTime).toFixed(1));
 }
 
 /**
