@@ -684,5 +684,5 @@ function convertToHours(dataInMinutes){
 //   didPassColour,
 //   parseFitbitCsvString,
 //   sumOf,
-//    convertToHours,
+//   convertToHours,
 // };
