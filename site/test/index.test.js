@@ -21,6 +21,7 @@ const {
   didPassColour,
   parseFitbitCsvString,
   sumOf,
+  convertToHours,
 } = require('../src');
 
 describe('activityTargetFromAge', () => {
@@ -317,5 +318,20 @@ describe('sumOf', () => {
   });
   test('Array of positive and negative numbers returns correct sum', () => {
     expect(sumOf([0, -1, 2, -3, 4])).toBe(2);
+  });
+});
+
+describe('convertToHours', () => {
+  test('Empty array returns empty array', () => {
+    expect(convertToHours([])).toEqual([]);
+  });
+  test('Array of one time returns correct array of hours', () => {
+    expect(convertToHours([60])).toEqual([1]);
+  });
+  test('Array of many times returns correct array of hours', () => {
+    expect(convertToHours([60, 30, 15, 90, 120])).toEqual([1, 0.5, 0.25, 1.5, 2]);
+  });
+  test('Array of negative and positive times returns correct array of hours', () => {
+    expect(convertToHours([60, -30, 15, -90, 120])).toEqual([1, -0.5, 0.25, -1.5, 2]);
   });
 });
